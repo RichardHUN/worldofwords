@@ -21,10 +21,10 @@
       font-weight: 600;
     }
 
-    .source-link {
+    .source-link, .credits {
       a {
         color: var(--accent);
-        text-decoration: underline;
+        text-decoration: none;
         transition: color 0.3s ease;
 
         &:hover {

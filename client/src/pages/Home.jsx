@@ -16,7 +16,7 @@ export default function Home() {
               <span className="subtitle">to the World of Words</span>
             </>
           ) : (
-            <span className="welcome-default">Welcome to the World of Words</span>
+            <span className="welcome-default">Welcome to the <br /> World of Words</span>
           )}
         </h1>
         <Link to="/games" className="btn btn-play fade-in-delay-1">Let's Play</Link>
