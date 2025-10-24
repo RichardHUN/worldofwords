@@ -1,0 +1,63 @@
+.about {
+  padding: 4rem 2rem;
+
+  .about-container {
+    max-width: 800px;
+    margin: 0 auto;
+
+    h1 {
+      text-align: center;
+      font-size: 3rem;
+      margin-bottom: 2rem;
+      color: var(--accent);
+    }
+
+    .about-content {
+      background: var(--card-bg);
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px var(--shadow);
+
+      p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .team {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 2px solid var(--border);
+
+        h2 {
+          font-size: 1.8rem;
+          margin-bottom: 1rem;
+          color: var(--text-primary);
+        }
+
+        p {
+          color: var(--text-secondary);
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 2rem 1rem;
+
+    .about-container {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .about-content {
+        padding: 2rem;
+
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
