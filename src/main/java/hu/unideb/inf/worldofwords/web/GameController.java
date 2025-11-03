@@ -45,4 +45,7 @@ public interface GameController {
     @GetMapping("/testBoyNames")
     List<String> testBoyNames();
 
+    @GetMapping("/testAnimals")
+    List<String> testAnimals();
+
 }
