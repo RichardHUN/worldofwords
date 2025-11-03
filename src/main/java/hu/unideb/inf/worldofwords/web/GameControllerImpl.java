@@ -1,7 +1,9 @@
 package hu.unideb.inf.worldofwords.web;
 
+import hu.unideb.inf.worldofwords.repository.BoyNamesRepository;
 import hu.unideb.inf.worldofwords.repository.CityRepository;
 import hu.unideb.inf.worldofwords.repository.CountryRepository;
+import hu.unideb.inf.worldofwords.repository.GirlNamesRepository;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +16,8 @@ public class GameControllerImpl implements GameController{
 
     private final CountryRepository countryRepository;
     private final CityRepository cityRepository;
+    private final GirlNamesRepository girlNamesRepository;
+    private final BoyNamesRepository boyNamesRepository;
 
     /**
      * Used to get the random letter for the game.
@@ -54,4 +58,15 @@ public class GameControllerImpl implements GameController{
     public List<String> testCities() {
         return cityRepository.findAll().getFirst().getCities();
     }
+
+    @Override
+    public List<String> testGirlNames() {
+        return girlNamesRepository.findAll().getFirst().getGirlNames();
+    }
+
+    @Override
+    public List<String> testBoyNames() {
+        return boyNamesRepository.findAll().getFirst().getBoyNames();
+    }
+
 }

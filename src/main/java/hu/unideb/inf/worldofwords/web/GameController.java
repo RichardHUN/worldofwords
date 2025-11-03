@@ -39,4 +39,10 @@ public interface GameController {
     @GetMapping("/testCities")
     List<String> testCities();
 
+    @GetMapping("/testGirlNames")
+    List<String> testGirlNames();
+
+    @GetMapping("/testBoyNames")
+    List<String> testBoyNames();
+
 }
