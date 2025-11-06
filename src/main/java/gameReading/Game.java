@@ -10,9 +10,8 @@ public class Game {
     public Game(LetterGenerator letterGenerator) {
         InputOutputHandler ioHandler = new InputOutputHandler();
         ScoreValidator scoreValidator = new ScoreValidator();
-        ScoreFileManager fileManager = new ScoreFileManager();
         
-        this.coordinator = new GameCoordinator(ioHandler, letterGenerator, scoreValidator, fileManager);
+        this.coordinator = new GameCoordinator(ioHandler, letterGenerator, scoreValidator);
     }
     
     public void startGame() {

@@ -13,13 +13,11 @@ import java.util.Map;
  * - InputOutputHandler for console I/O
  * - LetterGenerator for random letter generation
  * - ScoreValidator for word validation and scoring
- * - ScoreFileManager for saving scores to file
  */
 public class GameCoordinator {
     private final InputOutputHandler ioHandler;
     private final LetterGenerator letterGenerator;
     private final ScoreValidator scoreValidator;
-    private final ScoreFileManager fileManager;
     
     private final String[] categories = new String[]{
         "Country", "City", "Plant", "Animal", "Boy name", "Girl name"
@@ -31,12 +29,10 @@ public class GameCoordinator {
     
     public GameCoordinator(InputOutputHandler ioHandler, 
                           LetterGenerator letterGenerator,
-                          ScoreValidator scoreValidator,
-                          ScoreFileManager fileManager) {
+                          ScoreValidator scoreValidator) {
         this.ioHandler = ioHandler;
         this.letterGenerator = letterGenerator;
         this.scoreValidator = scoreValidator;
-        this.fileManager = fileManager;
     }
     
     /**
@@ -54,16 +50,6 @@ public class GameCoordinator {
         
         int totalPossible = roundsPlayed * categories.length;
         ioHandler.displayFarewell(username, roundsPlayed, cumulativeScore, totalPossible);
-        
-        if (ioHandler.promptSaveScores()) {
-            boolean saved = fileManager.saveScores(username, roundsPlayed, cumulativeScore, totalPossible);
-            if (saved) {
-                ioHandler.displaySaveSuccess(fileManager.getFilename());
-            } else {
-                ioHandler.displaySaveFailure("Unable to write to file");
-            }
-        }
-        
         ioHandler.displayGoodbye();
     }
     
