@@ -3,8 +3,6 @@ package gameReading.core;
 import gameReading.io.*;
 import gameReading.validation.*;
 
-
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -13,11 +11,13 @@ import java.util.Map;
  * - InputOutputHandler for console I/O
  * - LetterGenerator for random letter generation
  * - ScoreValidator for word validation and scoring
+ * - ScoreCalculator for point calculation
  */
 public class GameCoordinator {
     private final InputOutputHandler ioHandler;
     private final LetterGenerator letterGenerator;
     private final ScoreValidator scoreValidator;
+    private final ScoreCalculator scoreCalculator;
     
     private final String[] categories = new String[]{
         "Country", "City", "Plant", "Animal", "Boy name", "Girl name"
@@ -33,6 +33,7 @@ public class GameCoordinator {
         this.ioHandler = ioHandler;
         this.letterGenerator = letterGenerator;
         this.scoreValidator = scoreValidator;
+        this.scoreCalculator = new ScoreCalculator();
     }
     
     /**
@@ -62,34 +63,48 @@ public class GameCoordinator {
         
         Map<String, String> answers = new LinkedHashMap<>();
         Map<String, Boolean> correctness = new LinkedHashMap<>();
+        Map<String, Long> answerTimes = new LinkedHashMap<>();
         
-        boolean timedOut = collectAnswersWithTimeout(answers, letter, correctness);
+        collectAnswersWithTiming(answers, letter, correctness, answerTimes);
         
-        // Count the score from correctness map (already validated in parallel)
-        int score = 0;
-        for (Boolean isCorrect : correctness.values()) {
-            if (isCorrect != null && isCorrect) {
-                score++;
-            }
+        // Calculate points using ScoreCalculator
+        int[] pointsPerAnswer = new int[categories.length];
+        int totalScore = 0;
+        
+        for (int i = 0; i < categories.length; i++) {
+            String category = categories[i];
+            String answer = answers.get(category);
+            boolean isCorrect = correctness.get(category);
+            long timeInMillis = answerTimes.getOrDefault(category, 0L);
+            
+            int points = scoreCalculator.calculateAnswerPoints(answer, isCorrect, timeInMillis);
+            pointsPerAnswer[i] = points;
         }
         
-        ioHandler.displayRoundSummary(answers, correctness, categories);
-        ioHandler.displayScore(score, categories.length, timedOut);
+        totalScore = scoreCalculator.calculateRoundTotal(pointsPerAnswer, categories.length);
         
-        cumulativeScore += score;
+        ioHandler.displayRoundSummary(answers, correctness, categories);
+        ioHandler.displayDetailedScore(pointsPerAnswer, totalScore, categories);
+        
+        cumulativeScore += totalScore;
         roundsPlayed += 1;
     }
     
     /**
-     * Collect answers from the user and validate them sequentially.
-     * Returns false (no timeout for now).
+     * Collect answers from the user, track timing, and validate them sequentially.
      */
-    private boolean collectAnswersWithTimeout(Map<String, String> answers, char letter, Map<String, Boolean> correctness) {
-        // Simple sequential collection
+    private void collectAnswersWithTiming(Map<String, String> answers, char letter, 
+                                         Map<String, Boolean> correctness, Map<String, Long> answerTimes) {
+        // Collect answers with timing
         for (String category : categories) {
             ioHandler.promptForCategory(category);
+            long startTime = System.currentTimeMillis();
             String userAnswer = ioHandler.readLine();
+            long endTime = System.currentTimeMillis();
+            long timeTaken = endTime - startTime;
+            
             answers.put(category, userAnswer);
+            answerTimes.put(category, timeTaken);
         }
         
         // Validate all answers sequentially after collection
@@ -103,7 +118,5 @@ public class GameCoordinator {
             boolean isValid = scoreValidator.validateWord(answer, letter, category);
             correctness.put(category, isValid);
         }
-        
-        return false; // No timeout
     }
 }

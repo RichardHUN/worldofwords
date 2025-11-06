@@ -113,6 +113,26 @@ public class InputOutputHandler {
     }
     
     /**
+     * Display detailed score breakdown with points per category.
+     */
+    public void displayDetailedScore(int[] pointsPerAnswer, int totalScore, String[] categories) {
+        System.out.println();
+        System.out.println("=".repeat(50));
+        System.out.println("SCORE BREAKDOWN");
+        System.out.println("=".repeat(50));
+        
+        for (int i = 0; i < categories.length; i++) {
+            String category = categories[i];
+            int points = pointsPerAnswer[i];
+            System.out.printf("%-15s: %3d points\n", category, points);
+        }
+        
+        System.out.println("=".repeat(50));
+        System.out.printf("TOTAL SCORE    : %3d points\n", totalScore);
+        System.out.println("=".repeat(50));
+    }
+    
+    /**
      * Ask user if they want to play again.
      * Returns true for yes, false for no.
      */
@@ -142,7 +162,7 @@ public class InputOutputHandler {
     public void displayFarewell(String username, int roundsPlayed, int cumulativeScore, int totalPossible) {
         System.out.println();
         System.out.println("Thanks for playing, " + username + "!");
-        System.out.println("Rounds played: " + roundsPlayed + ", Cumulative score: " + cumulativeScore + "/" + totalPossible);
+        System.out.println("Rounds played: " + roundsPlayed + ", Cumulative score: " + cumulativeScore);
     }
     
     /**
