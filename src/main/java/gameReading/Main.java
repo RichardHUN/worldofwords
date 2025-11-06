@@ -1,6 +1,6 @@
 package gameReading;
-import gameReading.core.LetterGenerator;
 
+import gameReading.core.LetterGenerator;
 
 public class Main {
 	public static void main(String[] args) {

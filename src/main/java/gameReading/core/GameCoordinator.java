@@ -22,7 +22,7 @@ public class GameCoordinator {
     private final ScoreFileManager fileManager;
     
     private final String[] categories = new String[]{
-        "Country", "City", "Plant", "Animal", "Object", "Boy name", "Girl name"
+        "Country", "City", "Plant", "Animal", "Boy name", "Girl name"
     };
     
     private int cumulativeScore = 0;

@@ -28,20 +28,22 @@ public class ScoreValidator {
             return false;
         }
         
-        // Route to appropriate checker based on category
-        if (category.equals("City") || category.equals("Country")) {
-            // Use CountryCityChecker for cities and countries
-            return CountryCityChecker.apiHere(word);
-        } else if (category.equals("Boy name")) {
-            // Use NameChecker for names
-            return MaleChecker.isValidMaleName(word);
-        } else if (category.equals("Girl name")) {
-            return FemaleChecker.isValidFemaleName(word);
-        } else if (category.equals("Plant") || category.equals("Animal")) {
-            return PlantAnimalChecker.isValid(word, category);
-        } else {
-            // Use WordChecker for Object
-            return WordChecker.isLegitWord(word);
+        // Route to CheckerByCategory based on category
+        switch (category) {
+            case "Country":
+                return CheckerByCategory.isValidCountry(word);
+            case "City":
+                return CheckerByCategory.isValidCity(word);
+            case "Boy name":
+                return CheckerByCategory.isValidMaleName(word);
+            case "Girl name":
+                return CheckerByCategory.isValidFemaleName(word);
+            case "Animal":
+                return CheckerByCategory.isValidAnimalName(word);
+            case "Plant":
+                return CheckerByCategory.isValidPlantName(word);
+            default:
+                return false; // Unknown category
         }
     }
     
