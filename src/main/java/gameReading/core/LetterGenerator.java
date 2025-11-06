@@ -1,4 +1,4 @@
-package gameReading;
+package gameReading.core;
 
 import java.util.Random;
 

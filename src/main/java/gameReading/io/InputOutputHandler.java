@@ -1,4 +1,4 @@
-package gameReading;
+package gameReading.io;
 
 import java.util.Map;
 import java.util.Scanner;

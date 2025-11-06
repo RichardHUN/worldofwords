@@ -1,17 +1,12 @@
-package gameReading;
+package gameReading.core;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import gameReading.io.*;
+import gameReading.validation.*;
+
+
+
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * GameCoordinator orchestrates the game flow and connects all components:
@@ -82,9 +77,15 @@ public class GameCoordinator {
         Map<String, String> answers = new LinkedHashMap<>();
         Map<String, Boolean> correctness = new LinkedHashMap<>();
         
-        boolean timedOut = collectAnswersWithTimeout(answers);
+        boolean timedOut = collectAnswersWithTimeout(answers, letter, correctness);
         
-        int score = scoreValidator.calculateScore(answers, letter, correctness, categories);
+        // Count the score from correctness map (already validated in parallel)
+        int score = 0;
+        for (Boolean isCorrect : correctness.values()) {
+            if (isCorrect != null && isCorrect) {
+                score++;
+            }
+        }
         
         ioHandler.displayRoundSummary(answers, correctness, categories);
         ioHandler.displayScore(score, categories.length, timedOut);
@@ -94,51 +95,29 @@ public class GameCoordinator {
     }
     
     /**
-     * Collect answers from the user with a 60-second timeout.
-     * Returns true if timeout occurred, false otherwise.
+     * Collect answers from the user and validate them sequentially.
+     * Returns false (no timeout for now).
      */
-    private boolean collectAnswersWithTimeout(Map<String, String> answers) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor(runnable -> {
-            Thread thread = new Thread(runnable);
-            thread.setDaemon(true);
-            return thread;
-        });
-        
-        Callable<Void> inputTask = () -> {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            for (String category : categories) {
-                ioHandler.promptForCategory(category);
-                String userAnswer = null;
-                try {
-                    userAnswer = reader.readLine();
-                } catch (IOException ioException) {
-                    userAnswer = "";
-                }
-                if (userAnswer == null) userAnswer = "";
-                userAnswer = userAnswer.trim();
-                synchronized (answers) {
-                    answers.put(category, userAnswer);
-                }
-            }
-            return null;
-        };
-        
-        Future<Void> inputFuture = executorService.submit(inputTask);
-        boolean timedOut = false;
-        
-        try {
-            inputFuture.get(60, TimeUnit.SECONDS);
-        } catch (TimeoutException timeout) {
-            timedOut = true;
-            ioHandler.displayTimeoutMessage();
-            inputFuture.cancel(true);
-        } catch (InterruptedException | ExecutionException exception) {
-            ioHandler.displayInterruptionMessage(exception.getMessage());
-            inputFuture.cancel(true);
-        } finally {
-            executorService.shutdownNow();
+    private boolean collectAnswersWithTimeout(Map<String, String> answers, char letter, Map<String, Boolean> correctness) {
+        // Simple sequential collection
+        for (String category : categories) {
+            ioHandler.promptForCategory(category);
+            String userAnswer = ioHandler.readLine();
+            answers.put(category, userAnswer);
         }
         
-        return timedOut;
+        // Validate all answers sequentially after collection
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("Validating answers...");
+        System.out.println("=".repeat(50));
+        
+        for (String category : categories) {
+            String answer = answers.get(category);
+            System.out.println("\n📝 Validating " + category + ": " + answer);
+            boolean isValid = scoreValidator.validateWord(answer, letter, category);
+            correctness.put(category, isValid);
+        }
+        
+        return false; // No timeout
     }
 }

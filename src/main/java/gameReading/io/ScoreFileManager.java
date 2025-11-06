@@ -1,4 +1,4 @@
-package gameReading;
+package gameReading.io;
 
 import java.io.FileWriter;
 import java.io.IOException;
