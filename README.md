@@ -25,7 +25,7 @@ Using Maven (Windows)
    - To run directly: `mvn spring-boot:run`
    - To build a jar and run:
       - `mvn clean package`
-      - ~~`java -jar target/worldofwords-0.0.1-SNAPSHOT.jar`~~ *doesn't work*
+      - ~~`java -jar target/worldofwords-0.0.1-SNAPSHOT.jar`~~ *doesn't work yet*
 
 
 ## Configuration
