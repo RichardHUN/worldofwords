@@ -33,7 +33,19 @@ public interface GameController {
     Integer score();
 
     //temp
-    @GetMapping("/test")
-    List<String> test();
+    @GetMapping("/testCountries")
+    List<String> testCountries();
+
+    @GetMapping("/testCities")
+    List<String> testCities();
+
+    @GetMapping("/testGirlNames")
+    List<String> testGirlNames();
+
+    @GetMapping("/testBoyNames")
+    List<String> testBoyNames();
+
+    @GetMapping("/testAnimals")
+    List<String> testAnimals();
 
 }
