@@ -1,6 +1,6 @@
-package gameReading;
+package hu.unideb.inf.worldofwords.gameReading.gameReading;
 
-import gameReading.core.LetterGenerator;
+import hu.unideb.inf.worldofwords.gameReading.core.LetterGenerator;
 
 public class Main {
 	public static void main(String[] args) {

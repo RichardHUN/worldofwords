@@ -1,6 +1,8 @@
-package gameReading.validation;
+package hu.unideb.inf.worldofwords.gameReading.validation;
 
-import gameReading.checkers.*;
+//import gameReading.checkers.*;
+import hu.unideb.inf.worldofwords.gameReading.checkers.CheckerByCategory;
+
 import java.util.Map;
 
 /**

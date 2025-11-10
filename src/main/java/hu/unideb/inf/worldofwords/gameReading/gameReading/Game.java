@@ -1,8 +1,9 @@
-package gameReading;
+package hu.unideb.inf.worldofwords.gameReading.gameReading;
 
-import gameReading.core.*;
-import gameReading.io.*;
-import gameReading.validation.*;
+import hu.unideb.inf.worldofwords.gameReading.core.GameCoordinator;
+import hu.unideb.inf.worldofwords.gameReading.core.LetterGenerator;
+import hu.unideb.inf.worldofwords.gameReading.io.InputOutputHandler;
+import hu.unideb.inf.worldofwords.gameReading.validation.ScoreValidator;
 
 public class Game {
     private final GameCoordinator coordinator;

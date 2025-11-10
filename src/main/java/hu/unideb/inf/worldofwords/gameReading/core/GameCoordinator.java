@@ -1,7 +1,8 @@
-package gameReading.core;
+package hu.unideb.inf.worldofwords.gameReading.core;
 
-import gameReading.io.*;
-import gameReading.validation.*;
+import hu.unideb.inf.worldofwords.gameReading.io.InputOutputHandler;
+import hu.unideb.inf.worldofwords.gameReading.validation.ScoreCalculator;
+import hu.unideb.inf.worldofwords.gameReading.validation.ScoreValidator;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

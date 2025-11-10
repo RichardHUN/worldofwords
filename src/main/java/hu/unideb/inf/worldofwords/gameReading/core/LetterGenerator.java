@@ -1,4 +1,4 @@
-package gameReading.core;
+package hu.unideb.inf.worldofwords.gameReading.core;
 
 import java.util.Random;
 

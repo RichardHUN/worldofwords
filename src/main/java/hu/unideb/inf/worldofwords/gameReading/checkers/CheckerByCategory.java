@@ -1,4 +1,4 @@
-package gameReading.checkers;
+package hu.unideb.inf.worldofwords.gameReading.checkers;
 
 public class CheckerByCategory {
 

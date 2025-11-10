@@ -1,4 +1,4 @@
-package gameReading.io;
+package hu.unideb.inf.worldofwords.gameReading.io;
 
 import java.util.Map;
 import java.util.Scanner;

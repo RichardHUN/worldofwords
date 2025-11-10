@@ -1,4 +1,4 @@
-package gameReading.validation;
+package hu.unideb.inf.worldofwords.gameReading.validation;
 
 /**
  * ScoreCalculator handles all scoring logic for the game.
