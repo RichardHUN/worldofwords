@@ -1,10 +1,7 @@
 package hu.unideb.inf.worldofwords.web;
 
 import lombok.NonNull;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +30,35 @@ public interface GameController {
     Integer score();
 
     //temp
-    @GetMapping("/test")
-    List<String> test();
+    @GetMapping("/testCountries")
+    List<String> allCountries();
+
+    @GetMapping("/testCities")
+    List<String> allCities();
+
+    @GetMapping("/testGirlNames")
+    List<String> allGirlNames();
+
+    @GetMapping("/testBoyNames")
+    List<String> allBoyNames();
+
+    @GetMapping("/testAnimals")
+    List<String> allAnimals();
+
+
+    @GetMapping("/testCountry")
+    boolean testCountryExists(@RequestParam String country);
+
+    @GetMapping("/testCity")
+    boolean testCityExists(@RequestParam String city);
+
+    @GetMapping("/testGirlName")
+    boolean testGirlNameExists(@RequestParam String girlName);
+
+    @GetMapping("/testBoyName")
+    boolean testBoyNameExists(@RequestParam String boyName);
+
+    @GetMapping("/testAnimal")
+    boolean testAnimalExists(@RequestParam String animal);
 
 }

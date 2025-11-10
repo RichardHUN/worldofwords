@@ -1,6 +1,6 @@
 package hu.unideb.inf.worldofwords.web;
 
-import hu.unideb.inf.worldofwords.repository.CountryRepository;
+import hu.unideb.inf.worldofwords.service.GameService;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class GameControllerImpl implements GameController{
 
-    private final CountryRepository countryRepository;
+    private final GameService service;
 
     /**
      * Used to get the random letter for the game.
@@ -44,7 +44,53 @@ public class GameControllerImpl implements GameController{
     }
 
     @Override
-    public List<String> test() {
-        return countryRepository.findAll().getFirst().getCountries();
+    public List<String> allCountries() {
+        return service.allCountries();
+    }
+
+    @Override
+    public List<String> allCities() {
+        return service.allCities();
+    }
+
+    @Override
+    public List<String> allGirlNames() {
+        return service.allGirlNames();
+    }
+
+    @Override
+    public List<String> allBoyNames() {
+        return service.allBoyNames();
+    }
+
+    @Override
+    public List<String> allAnimals() {
+        return service.allAnimals();
+    }
+
+
+    @Override
+    public boolean testCountryExists(String country) {
+        return service.isValidCountry(country);
+    }
+
+    @Override
+    public boolean testCityExists(String city) {
+        return service.isValidCity(city);
+    }
+
+    @Override
+    public boolean testGirlNameExists(String girlName) {
+        return service.isValidGirlName(girlName);
+    }
+
+    @Override
+    public boolean testBoyNameExists(String boyName) {
+        return service.isValidBoyName(boyName);
+    }
+
+    @Override
+    public boolean testAnimalExists(String animal) {
+        return service.isValidAnimal(animal);
     }
 }

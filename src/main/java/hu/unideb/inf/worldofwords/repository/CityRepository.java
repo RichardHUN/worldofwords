@@ -1,9 +1,9 @@
 package hu.unideb.inf.worldofwords.repository;
 
-import hu.unideb.inf.worldofwords.model.CountryList;
+import hu.unideb.inf.worldofwords.model.CityList;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CountryRepository extends MongoRepository<CountryList, String> {
+public interface CityRepository extends MongoRepository<CityList, String> {
 }
