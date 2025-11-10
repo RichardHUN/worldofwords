@@ -1,6 +1,5 @@
 package hu.unideb.inf.worldofwords.gameReading.validation;
 
-//import gameReading.checkers.*;
 import hu.unideb.inf.worldofwords.gameReading.checkers.CheckerByCategory;
 
 import java.util.Map;
@@ -29,24 +28,16 @@ public class ScoreValidator {
         if (firstCharacter != Character.toUpperCase(letter)) {
             return false;
         }
-        
+
         // Route to CheckerByCategory based on category
-        switch (category) {
-            case "Country":
-                return CheckerByCategory.isValidCountry(word);
-            case "City":
-                return CheckerByCategory.isValidCity(word);
-            case "Boy name":
-                return CheckerByCategory.isValidMaleName(word);
-            case "Girl name":
-                return CheckerByCategory.isValidFemaleName(word);
-            case "Animal":
-                return CheckerByCategory.isValidAnimalName(word);
-            case "Plant":
-                return CheckerByCategory.isValidPlantName(word);
-            default:
-                return false; // Unknown category
-        }
+        return switch (category) {
+            case "Country" -> CheckerByCategory.isValidCountry(word);
+            case "City" -> CheckerByCategory.isValidCity(word);
+            case "Boy name" -> CheckerByCategory.isValidMaleName(word);
+            case "Girl name" -> CheckerByCategory.isValidFemaleName(word);
+            case "Animal" -> CheckerByCategory.isValidAnimalName(word);
+            default -> false; // Unknown category
+        };
     }
     
     /**
