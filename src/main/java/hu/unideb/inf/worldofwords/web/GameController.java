@@ -1,5 +1,6 @@
 package hu.unideb.inf.worldofwords.web;
 
+import hu.unideb.inf.worldofwords.model.LeaderboardEntry;
 import lombok.NonNull;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,5 +61,9 @@ public interface GameController {
 
     @GetMapping("/testAnimal")
     boolean testAnimalExists(@RequestParam String animal);
+
+
+    @GetMapping("/testLeaderboard")
+    List<LeaderboardEntry> testLeaderboard();
 
 }

@@ -1,5 +1,6 @@
 package hu.unideb.inf.worldofwords.web;
 
+import hu.unideb.inf.worldofwords.model.LeaderboardEntry;
 import hu.unideb.inf.worldofwords.service.GameService;
 import lombok.AllArgsConstructor;
 import lombok.NonNull;
@@ -92,5 +93,11 @@ public class GameControllerImpl implements GameController{
     @Override
     public boolean testAnimalExists(String animal) {
         return service.isValidAnimal(animal);
+    }
+
+
+    @Override
+    public List<LeaderboardEntry> testLeaderboard() {
+        return service.getLeaderboard();
     }
 }

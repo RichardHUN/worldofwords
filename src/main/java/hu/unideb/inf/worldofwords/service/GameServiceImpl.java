@@ -1,12 +1,14 @@
 package hu.unideb.inf.worldofwords.service;
 
+import hu.unideb.inf.worldofwords.model.LeaderboardEntry;
 import hu.unideb.inf.worldofwords.repository.*;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 
-/*@AllArgsConstructor
-@RequiredArgsConstructor*/
+@AllArgsConstructor
 @Service
 public class GameServiceImpl implements GameService {
 
@@ -15,14 +17,7 @@ public class GameServiceImpl implements GameService {
     private final GirlNamesRepository girlNamesRepository;
     private final BoyNamesRepository boyNamesRepository;
     private final AnimalRepository animalRepository;
-
-    public GameServiceImpl(CountryRepository countryRepository, CityRepository cityRepository, GirlNamesRepository girlNamesRepository, BoyNamesRepository boyNamesRepository, AnimalRepository animalRepository) {
-        this.countryRepository = countryRepository;
-        this.cityRepository = cityRepository;
-        this.girlNamesRepository = girlNamesRepository;
-        this.boyNamesRepository = boyNamesRepository;
-        this.animalRepository = animalRepository;
-    }
+    private final LeaderboardRepository leaderboardRepository;
 
     @Override
     public List<String> allCountries() {
@@ -72,5 +67,13 @@ public class GameServiceImpl implements GameService {
     @Override
     public boolean isValidAnimal(String animal) {
         return animalRepository.findAll().getFirst().getAnimals().contains(animal);
+    }
+
+    @Override
+    public List<LeaderboardEntry> getLeaderboard() {
+        return leaderboardRepository.findAll().getFirst().getLeaderboard()
+                .stream()
+                .sorted(Comparator.comparingInt(LeaderboardEntry::getScore).reversed())
+                .toList();
     }
 }

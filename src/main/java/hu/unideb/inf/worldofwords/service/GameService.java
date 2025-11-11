@@ -1,5 +1,7 @@
 package hu.unideb.inf.worldofwords.service;
 
+import hu.unideb.inf.worldofwords.model.LeaderboardEntry;
+
 import java.util.List;
 
 public interface GameService {
@@ -23,5 +25,7 @@ public interface GameService {
     boolean isValidBoyName(String boyName);
 
     boolean isValidAnimal(String animal);
+
+    List<LeaderboardEntry> getLeaderboard();
 
 }
