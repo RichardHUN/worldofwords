@@ -100,4 +100,9 @@ public class GameControllerImpl implements GameController{
     public List<LeaderboardEntry> testLeaderboard() {
         return service.getLeaderboard();
     }
+
+    @Override
+    public List<LeaderboardEntry> updateLeaderboard(LeaderboardEntry entry) {
+        return service.updateLeaderboard(entry);
+    }
 }

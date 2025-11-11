@@ -1,10 +1,12 @@
 package hu.unideb.inf.worldofwords.service;
 
+import hu.unideb.inf.worldofwords.model.Leaderboard;
 import hu.unideb.inf.worldofwords.model.LeaderboardEntry;
 import hu.unideb.inf.worldofwords.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -75,5 +77,21 @@ public class GameServiceImpl implements GameService {
                 .stream()
                 .sorted(Comparator.comparingInt(LeaderboardEntry::getScore).reversed())
                 .toList();
+    }
+
+    @Override
+    public List<LeaderboardEntry> updateLeaderboard(LeaderboardEntry entry) {
+        List<LeaderboardEntry> leaderboardEntryList = new ArrayList<>(getLeaderboard());
+        leaderboardEntryList.add(entry);
+
+        leaderboardRepository.deleteAll();
+        saveLeaderboard(new Leaderboard(leaderboardEntryList));
+
+        return getLeaderboard();
+    }
+
+    @Override
+    public Leaderboard saveLeaderboard(Leaderboard leaderboard) {
+        return leaderboardRepository.save(leaderboard);
     }
 }

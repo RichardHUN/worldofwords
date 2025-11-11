@@ -1,5 +1,6 @@
 package hu.unideb.inf.worldofwords.service;
 
+import hu.unideb.inf.worldofwords.model.Leaderboard;
 import hu.unideb.inf.worldofwords.model.LeaderboardEntry;
 
 import java.util.List;
@@ -27,5 +28,9 @@ public interface GameService {
     boolean isValidAnimal(String animal);
 
     List<LeaderboardEntry> getLeaderboard();
+
+    List<LeaderboardEntry> updateLeaderboard(LeaderboardEntry entry);
+
+    Leaderboard saveLeaderboard(Leaderboard leaderboard);
 
 }

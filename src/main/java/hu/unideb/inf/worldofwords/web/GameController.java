@@ -66,4 +66,7 @@ public interface GameController {
     @GetMapping("/testLeaderboard")
     List<LeaderboardEntry> testLeaderboard();
 
+    @PostMapping("/updateLeaderboard")
+    List<LeaderboardEntry> updateLeaderboard(@RequestBody LeaderboardEntry entry);
+
 }
