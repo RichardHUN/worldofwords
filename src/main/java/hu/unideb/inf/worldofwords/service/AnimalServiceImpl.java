@@ -1,10 +1,12 @@
 package hu.unideb.inf.worldofwords.service;
 
+import hu.unideb.inf.worldofwords.model.Animal;
 import hu.unideb.inf.worldofwords.repository.AnimalRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -14,12 +16,12 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public boolean isValidAnimal(String animal) {
-        return repository.findAll().getFirst().getAnimals().contains(animal);
+        return repository.existsAnimalByName(animal);
     }
 
     @Override
     public List<String> allAnimals() {
-        return repository.findAll().getFirst().getAnimals();
+        return repository.findAll().stream().map(Animal::getName).collect(Collectors.toList());
     }
 
 }

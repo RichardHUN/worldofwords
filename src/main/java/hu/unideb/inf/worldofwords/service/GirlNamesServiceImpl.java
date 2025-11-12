@@ -1,10 +1,12 @@
 package hu.unideb.inf.worldofwords.service;
 
+import hu.unideb.inf.worldofwords.model.GirlName;
 import hu.unideb.inf.worldofwords.repository.GirlNamesRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -14,12 +16,12 @@ public class GirlNamesServiceImpl implements GirlNamesService {
 
     @Override
     public boolean isValidGirlName(String girlName) {
-        return repository.findAll().getFirst().getGirlNames().contains(girlName);
+        return repository.existsGirlNameByName(girlName);
     }
 
     @Override
     public List<String> allGirlNames() {
-        return repository.findAll().getFirst().getGirlNames();
+        return repository.findAll().stream().map(GirlName::getName).collect(Collectors.toList());
     }
 
 }
