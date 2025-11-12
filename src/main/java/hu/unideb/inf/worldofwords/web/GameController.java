@@ -5,6 +5,7 @@ import lombok.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public interface GameController {
@@ -63,10 +64,13 @@ public interface GameController {
     boolean testAnimalExists(@RequestParam String animal);
 
 
+    @GetMapping("/testLeaderboardEntry")
+    Optional<LeaderboardEntry> testLeaderboard(@RequestParam String playerName);
+
     @GetMapping("/testLeaderboard")
     List<LeaderboardEntry> testLeaderboard();
 
     @PostMapping("/updateLeaderboard")
-    List<LeaderboardEntry> updateLeaderboard(@RequestBody LeaderboardEntry entry);
+    LeaderboardEntry updateLeaderboard(@RequestBody LeaderboardEntry entry);
 
 }
