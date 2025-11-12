@@ -1,11 +1,7 @@
 package hu.unideb.inf.worldofwords.web;
 
-import hu.unideb.inf.worldofwords.model.LeaderboardEntry;
 import lombok.NonNull;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Optional;
 
 @RestController
 public interface GameController {
@@ -31,46 +27,6 @@ public interface GameController {
     @GetMapping("/game/score")
     Integer score();
 
-    //temp
-    @GetMapping("/testCountries")
-    List<String> allCountries();
 
-    @GetMapping("/testCities")
-    List<String> allCities();
-
-    @GetMapping("/testGirlNames")
-    List<String> allGirlNames();
-
-    @GetMapping("/testBoyNames")
-    List<String> allBoyNames();
-
-    @GetMapping("/testAnimals")
-    List<String> allAnimals();
-
-
-    @GetMapping("/testCountry")
-    boolean testCountryExists(@RequestParam String country);
-
-    @GetMapping("/testCity")
-    boolean testCityExists(@RequestParam String city);
-
-    @GetMapping("/testGirlName")
-    boolean testGirlNameExists(@RequestParam String girlName);
-
-    @GetMapping("/testBoyName")
-    boolean testBoyNameExists(@RequestParam String boyName);
-
-    @GetMapping("/testAnimal")
-    boolean testAnimalExists(@RequestParam String animal);
-
-
-    @GetMapping("/testLeaderboardEntry")
-    Optional<LeaderboardEntry> testLeaderboard(@RequestParam String playerName);
-
-    @GetMapping("/testLeaderboard")
-    List<LeaderboardEntry> testLeaderboard();
-
-    @PostMapping("/updateLeaderboard")
-    LeaderboardEntry updateLeaderboard(@RequestBody LeaderboardEntry entry);
 
 }
